@@ -1,15 +1,21 @@
+import processing.core.PVector;
+
 class Snowflake {
 
     /** The sketch that the snowflake is inside */
     private Sketch s;
     /** the radius of the snowflake */
     private float radius;
+    /** the x position of the snowflake */
     private float x;
+    /** the y position of the snowflake */
     private float y;
     /** The number of pixels the snowflake moves right per frame */
     private float xSpeed;
     /** The number of pixels the snowflake moves down per frame */
     private float ySpeed;
+
+
 
 /** Empty constructor to keep the defaults. Only sets up our link. */
 public Snowflake(Sketch sketch) {
@@ -22,7 +28,6 @@ public Snowflake(Sketch sketch) {
 }
 
 /** Fully specified constructor to allow changes to size, position, speed */
-/** Does NOT allow changing color! Need to use setColors() for that. */
 public Snowflake(Sketch sketch, float radius, float x, float y, float xspeed, float yspeed) {
     this.s = sketch;
     this.radius = radius;
@@ -32,28 +37,29 @@ public Snowflake(Sketch sketch, float radius, float x, float y, float xspeed, fl
     this.ySpeed = -yspeed; //set y speed to negative cus its falling
 }
 
-// Accessors (getters) go here
+// methods
 
-public float getRadius() {
-    return radius;
+/** This is the wind method. I creates a vector to the mouse position and a vector
+ * to the the center the snowflake. It subracts those vectors to get the vector from 
+ * the mouse to the snowflake. It then uses the distance between the mouse and the 
+ * snowflake to determine the strength of the wind, and 
+ * used the normalized the vector to get the direction of the wind. 
+ * It then multiplies the direction vector to the wind strength
+ * and adds the x component of the vector to the x speed and 
+ * the y component to the y speed.
+ */
+public void wind(){
+    PVector mouseVector = new PVector(s.mouseX,s.mouseY);
+    PVector myVector = new PVector(x,y);
+    PVector windVector = mouseVector.sub(myVector);
+    float size = Math.max(5,1/Sketch.dist(x, y, s.mouseX, s.mouseY));
+    PVector speedVector = windVector.normalize().mult(-size/250);
+    xSpeed += speedVector.x;
+    ySpeed += speedVector.y;
 }
-
-public float getDiameter() {
-    return radius * 2;
-}
-
-public float getX() {
-    return x;
-}
-
-public float getY() {
-    return y;
-}
-
-// Setters that you need go here - by default, only colors
 
 /**
- * Draws the ball on the given sketch
+ * Draws the snowflake on the given sketch
  */
     public void draw() {
         s.line(x+radius,y,x-radius,y);
@@ -63,7 +69,7 @@ public float getY() {
     }
 
     //copy and pasted from bubbles and it worked
-    /** */
+    /** Moves the snowflake so that the next time it draws it will be in a different place */
     public void move() {
         x = x + xSpeed;
         y = y + ySpeed;

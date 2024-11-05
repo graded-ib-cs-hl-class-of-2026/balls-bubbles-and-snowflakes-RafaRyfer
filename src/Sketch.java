@@ -30,25 +30,26 @@ public class Sketch extends PApplet {
      * this to initialize the sketch.
      */
     public void setup() {
-        ball1 = new Ball(this);
-        ball2 = new Ball(this, 12, 100, 100, 4, -2);
-        ball3 = new Ball(this, 26, 300, 300, -1, -13);
-        ball4 = new Ball(this, 10, 25, 400, -5, 2);
+        ball1 = new Ball(this, random(10, 50), random(450), random(50, 450), random(-10, 10), random(-10, 10));
+        ball2 = new Ball(this, random(10, 50), random(450), random(50, 450), random(-10, 10), random(-10, 10));
+        ball3 = new Ball(this, random(10, 50), random(450), random(50, 450), random(-10, 10), random(-10, 10));
+        ball4 = new Ball(this, random(10, 50), random(450), random(50, 450), random(-10, 10), random(-10, 10));
 
-        bubble1 = new Bubble(this);
-        bubble2 = new Bubble(this, 40, 98, 200, 2, -0.5f);
-        bubble3 = new Bubble(this, 8, 50, 150, 1, -0.5f);
-        bubble4 = new Bubble(this, 22, 200, 300, 1.5f, -0.5f);
+        bubble1 = new Bubble(this, random(10, 50), random(50, 450), random(50, 450), random(-2, 2), -0.5f);
+        bubble2 = new Bubble(this, random(10, 50), random(50, 450), random(50, 450), random(-2, 2), -0.5f);
+        bubble3 = new Bubble(this, random(10, 50), random(50, 450), random(50, 450), random(-2, 2), -0.5f);
+        bubble4 = new Bubble(this, random(10, 50), random(50, 450), random(50, 450), random(-2, 2), -0.5f);
 
-        snowflake1 = new Snowflake(this);
-        snowflake2 = new Snowflake(this, 22, 134, 231, 1.5f, -0.5f);
-        snowflake3 = new Snowflake(this, 17, 50, 90, 1.5f, -0.5f);
-        snowflake4 = new Snowflake(this, 30, 200, 76, 1.5f, -0.5f);
+        snowflake1 = new Snowflake(this, random(10, 50), random(50, 450), random(50, 450), random(-2, 2), -0.5f);
+        snowflake2 = new Snowflake(this, random(10, 50), random(50, 450), random(50, 450), random(-2, 2), -0.5f);
+        snowflake3 = new Snowflake(this, random(10, 50), random(50, 450), random(50, 450), random(-2, 2), -0.5f);
+        snowflake4 = new Snowflake(this, random(10, 50), random(50, 450), random(50, 450), random(-2, 2), -0.5f);
 
         // Mr. Griswold helped me understand color
-        ball2.setColors(color(78, 200, 100), 0);
-        ball3.setColors(color(64, 17, 178), 0);
-        ball4.setColors(color(222, 97, 255), 0);
+        ball1.setColors(color(random(0, 255), random(0, 255), random(0, 255)), 0);
+        ball2.setColors(color(random(0, 255), random(0, 255), random(0, 255)), 0);
+        ball3.setColors(color(random(0, 255), random(0, 255), random(0, 255)), 0);
+        ball4.setColors(color(random(0, 255), random(0, 255), random(0, 255)), 0);
     }
 
     /**
@@ -78,12 +79,16 @@ public class Sketch extends PApplet {
 
         snowflake1.draw();
         snowflake1.move();
+        snowflake1.wind();
         snowflake2.draw();
         snowflake2.move();
+        snowflake2.wind();
         snowflake3.draw();
         snowflake3.move();
+        snowflake3.wind();
         snowflake4.draw();
         snowflake4.move();
+        snowflake4.wind();
       
     }
 
